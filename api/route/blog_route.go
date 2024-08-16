@@ -3,7 +3,7 @@ package route
 import (
 	"Blog/api/controller"
 	"Blog/domain"
-	"Blog/respository"
+	"Blog/repository"
 	"Blog/usecase"
 
 	"time"
@@ -13,7 +13,7 @@ import (
 )
 
 func NewBlogRouter(timeout time.Duration, db *mongo.Database, group *gin.RouterGroup){
-	br := respository.NewBlogRepository(db, domain.CollectionBlog)
+	br := repository.NewBlogRepository(db, domain.CollectionBlog)
 	bc := &controller.BlogController{
 		BlogUsecase: usecase.NewBlogUsecase(br, timeout),
 	}

@@ -21,6 +21,8 @@ type Env struct {
 	AccessTokenSecret      string `mapstructure:"ACCESS_TOKEN_SECRET"`
 	RefreshTokenSecret     string `mapstructure:"REFRESH_TOKEN_SECRET"`
 	MongoDBURI             string `mapstructure:"MONGODB_URI"`
+	Email             string `mapstructure:"EMAIL"`
+	Password          string `mapstructure:"PASSWORD"`
 }
 
 func NewEnv() *Env {
