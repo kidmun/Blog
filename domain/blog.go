@@ -16,8 +16,11 @@ type Blog struct {
 	Title string `json:"title" bson:"title"`
 	Content string `json:"content" bson:"content"`
 	Tags []string `json:"tags" bson:"tags"`
+	Likes int `json:"like" bson:"like"`
+	DisLikes int `json:"disLike" bson:"disLike"`
 	Date time.Time `json:"date" bson:"date"`
 }
+
 
 type CreateBlogRequest struct {
 	Title string `json:"title" bson:"title" binding:"required,min=3,max=100"`
@@ -43,4 +46,5 @@ type BlogRepository interface {
 	GetByID(ctx context.Context, id primitive.ObjectID) (*Blog, error)
 	Update(ctx context.Context,id primitive.ObjectID,  blog *BlogUpdateRequest) error
 	Delete(ctx context.Context, id primitive.ObjectID) error
+	
 }

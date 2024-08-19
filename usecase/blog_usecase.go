@@ -19,7 +19,6 @@ func NewBlogUsecase(blogRepository domain.BlogRepository, contextTimout time.Dur
 		contextTimeout: contextTimout,
 	}
 }
-
 func (b *blogUsecase) Create(ctx context.Context, blog *domain.Blog) (primitive.ObjectID, error) {
 	ctx, cancel := context.WithTimeout(ctx, b.contextTimeout)
 	defer cancel()
@@ -36,13 +35,11 @@ func (b *blogUsecase) GetByID(ctx context.Context, id primitive.ObjectID) (*doma
 	defer cancel()
 	return b.blogRepository.GetByID(ctx, id)
 }
-
 func (b *blogUsecase) Update(ctx context.Context, id primitive.ObjectID, blog *domain.BlogUpdateRequest) error {
 	ctx, cancel := context.WithTimeout(ctx, b.contextTimeout)
 	defer cancel()
 	return b.blogRepository.Update(ctx, id, blog)
 }
-
 
 func (b *blogUsecase) Delete(ctx context.Context, id primitive.ObjectID) error {
 	ctx, cancel := context.WithTimeout(ctx, b.contextTimeout)

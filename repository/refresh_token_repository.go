@@ -28,6 +28,7 @@ func (r *refreshTokenRepository) StoreRefreshToken(ctx context.Context, token *d
 	}
 	return nil
 }
+
 func (r *refreshTokenRepository) GetStoredRefreshToken(ctx context.Context, userID primitive.ObjectID) (*domain.RefreshToken, error) {
 	filter := bson.M{"user_id": userID}
 	var refreshToken domain.RefreshToken
@@ -36,4 +37,9 @@ func (r *refreshTokenRepository) GetStoredRefreshToken(ctx context.Context, user
 		return nil, err 
 	}
 	return &refreshToken, nil
+}
+
+func (r *refreshTokenRepository) DeleteTokensByUserID(ctx context.Context, userID primitive.ObjectID) error {
+    _, err := r.database.Collection(r.collection).DeleteMany(ctx, bson.M{"user_id": userID})
+    return err
 }

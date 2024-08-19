@@ -35,9 +35,13 @@ type RefreshTokenUsecase interface {
 	ExtractIDFromToken(requestToken string, secret string) (string, error)
 	StoreRefreshToken(ctx context.Context,token *RefreshToken) error
 	GetStoredRefreshToken(ctx context.Context, userID primitive.ObjectID) (*RefreshToken, error)
+	DeleteTokensByUserID(ctx context.Context, userID primitive.ObjectID) error
+	
 }
 
 type RefreshTokenRepository interface {
 	StoreRefreshToken(ctx context.Context,token *RefreshToken) error
 	GetStoredRefreshToken(ctx context.Context, userID primitive.ObjectID) (*RefreshToken, error)
+	DeleteTokensByUserID(ctx context.Context, userID primitive.ObjectID) error
+	
 } 

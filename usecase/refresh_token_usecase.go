@@ -48,3 +48,7 @@ func (rtu *refreshTokenUsecase) StoreRefreshToken(ctx context.Context, token *do
 func (rtu *refreshTokenUsecase) GetStoredRefreshToken(ctx context.Context, userID primitive.ObjectID) (*domain.RefreshToken, error) {
 	return rtu.refreshTokenRepository.GetStoredRefreshToken(ctx, userID)
 }
+func (rtu *refreshTokenUsecase)  DeleteTokensByUserID(ctx context.Context, userID primitive.ObjectID) error {
+	return rtu.refreshTokenRepository.DeleteTokensByUserID(ctx, userID)
+}
+

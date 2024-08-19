@@ -26,4 +26,5 @@ type UserRepository interface {
 	GetByEmail(c context.Context, email string) (*User, error)
 	GetByID(c context.Context, id primitive.ObjectID) (*User, error)
 	UpdateUserVerificationStatus(ctx context.Context, userID primitive.ObjectID) error
+	UpdatePassword(ctx context.Context, userID primitive.ObjectID, newPassword ResetPasswordRequest) error
 }

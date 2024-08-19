@@ -3,13 +3,10 @@ package main
 import (
 	"Blog/api/route"
 	"Blog/bootstrap"
-	
 	"time"
-
 	"github.com/gin-gonic/gin"
 )
 func main() {	
-
 	app := bootstrap.App()
 	env := app.Env
 	db := app.Mongo.Database(env.DBName)

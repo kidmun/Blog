@@ -13,7 +13,6 @@ type signupUsecase struct {
 	userRepository domain.UserRepository
 	contextTimeout time.Duration
 }
-
 func NewSignupUsecase(userRepository domain.UserRepository, contextTimeout time.Duration) domain.SignupUsecase {
 	return &signupUsecase{
 		userRepository: userRepository,

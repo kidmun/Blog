@@ -23,6 +23,8 @@ type Env struct {
 	MongoDBURI             string `mapstructure:"MONGODB_URI"`
 	Email             string `mapstructure:"EMAIL"`
 	Password          string `mapstructure:"PASSWORD"`
+	PasswordResetTokenExpiryHour  int `mapstructure:"PASSWORD_RESET_EXPIRY_HOUR"`
+	PasswordResetTokenSecret  string `mapstructure:"PASSWORD_RESET_SECRET"`
 }
 
 func NewEnv() *Env {

@@ -5,6 +5,7 @@ import (
 	"Blog/domain"
 	"net/http"
 	"time"
+
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -36,7 +37,7 @@ func (rtc *RefreshTokenController) RefreshToken(ctx *gin.Context) {
 	}
 	user, err := rtc.RefreshTokenUsecase.GetUserByID(ctx, id)
 	if err != nil {
-		if err == mongo.ErrNoDocuments{
+		if err == mongo.ErrNoDocuments {
 			ctx.JSON(http.StatusNotFound, domain.ErrorResponse{Message: "refresh token not found"})
 			return
 		}
@@ -50,6 +51,11 @@ func (rtc *RefreshTokenController) RefreshToken(ctx *gin.Context) {
 	}
 	if storedToken.Revoked {
 		ctx.JSON(http.StatusUnauthorized, domain.ErrorResponse{Message: "Refresh token has been revoked"})
+		return
+	}
+	err = rtc.RefreshTokenUsecase.DeleteTokensByUserID(ctx, user.ID)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, domain.ErrorResponse{Message: err.Error()})
 		return
 	}
 

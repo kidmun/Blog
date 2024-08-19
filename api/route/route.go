@@ -3,9 +3,7 @@ package route
 import (
 	"Blog/bootstrap"
 	"time"
-
 	"Blog/api/middleware"
-
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/mongo"
 )
@@ -18,4 +16,8 @@ func Setup(env *bootstrap.Env, timeout time.Duration, db *mongo.Database, gin *g
 	protectedRouter := gin.Group("")
 	protectedRouter.Use(middleware.JwtAuthMiddleware(env.AccessTokenSecret))
 	NewBlogRouter(timeout, db, protectedRouter)
+	NewForgotPasswordRouter(env, timeout, db, protectedRouter)
+	NewLogoutRouter(env, timeout, db, protectedRouter)
+	NewLikeDislikeRouter(timeout, db, protectedRouter)
+	NewCommentRouter(timeout, db, protectedRouter)
 }

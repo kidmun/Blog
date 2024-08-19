@@ -49,6 +49,11 @@ func (ur *userRepository) Fetch(ctx context.Context)([]*domain.User, error){
 	return users, err
 }
 
+func (ur *userRepository)UpdatePassword(ctx context.Context, userID primitive.ObjectID, newPassword domain.ResetPasswordRequest) error{
+	_, err := ur.database.Collection(ur.collection).UpdateOne(ctx, bson.M{"_id": userID}, bson.M{"$set": bson.M{"password": newPassword.NewPassword}})
+	return err
+}
+
 func (ur *userRepository)GetByEmail(c context.Context, email string) (*domain.User, error){
 	collection := ur.database.Collection(ur.collection)
 	var user *domain.User
